@@ -1,12 +1,11 @@
 # Exercise 4: Q&A, with a database
-
 _Goal: interacting with a database while experimenting with async code_.
 
 Update the previous "Q&A" exercise to use a database.
 
-Manage a list of objects that include information about some questions and their answers. The stored information is the same as the previous exercise, with an _additional id_ for both questions and answers, i.e.,:
+Manage a list of objects that include information about some questions and their answers. The stored information is the same as the previous exercise, with an *additional id* for both questions and answers, i.e.,:
 
-| `Question` object |
+| `Question` object | 
 |----------|
 | id (int) |
 | question text (string) |
@@ -23,13 +22,12 @@ Note that the "list of answers (array)" is no longer needed, since it will be st
 | posting date (datejs) |
 | score (positive or negative integer) |
 
-## Database
 
 The information should also be stored in a SQlite database (`questions.sqlite`), desighend with database tables corresponding to the Q&A data:
 
 ### `question` table
 
-| Field | Type |
+| Field | Type | 
 |-------|------|
 | id    | integer |
 | question | text |
@@ -38,7 +36,7 @@ The information should also be stored in a SQlite database (`questions.sqlite`),
 
 ### `answer` table
 
-| Field | Type |
+| Field | Type | 
 |-------|------|
 | id    | integer |
 | answer | text |
@@ -46,8 +44,6 @@ The information should also be stored in a SQlite database (`questions.sqlite`),
 | date | date |
 | score | integer |
 | questionId | integer |
-
-### Methods
 
 Each `Question` object will have the following methods, operating directly on the database:
 
