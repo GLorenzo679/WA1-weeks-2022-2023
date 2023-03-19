@@ -9,7 +9,6 @@ const db = new sqlite.Database('questions.sqlite', (err) => {
 
 function QuestionList() {
     this.addQuestion = function addQuestion(question) {
-        // console.log("The received question is: " + question);
         return new Promise((resolve, reject) => {
             const sql = "INSERT INTO question VALUES (?, ?, ?, ?)";
 
@@ -20,7 +19,7 @@ function QuestionList() {
     this.getQuestion = function getQuestion(id) {
         return new Promise((resolve, reject) => {
             console.log("Preparing for the query");
-            const sql = 'SELECT * FROM question WHERE id = ?';
+            const sql = "SELECT * FROM question WHERE id = ?";
             
             db.get(sql, [id], (err, row) => {
                 if (err)
@@ -34,7 +33,47 @@ function QuestionList() {
     this.addAnswer = function addAnswer(answer, questionId) {
         return new Promise((resolve, reject) => {
             const sql = "INSERT INTO answer VALUES (?,?,?,?,?,?)";
-            db.run(sql, [answer.id, answer.text, answer.author, answer.score, answer.date, questionId]);
+            
+            db.run(sql, [answer.id, answer.text, answer.author, answer.date, answer.score, questionId]);
+        });
+    }
+
+    this.getAnswers = function getAnswers(questionId) {
+        return new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM answer WHERE id = ?";
+            
+            db.all(sql, [questionId], (err, rows) => {
+                if (err)
+                    reject(err);
+                else
+                    resolve(rows);
+            })
+        });
+    }
+
+    this.getTop = function getTop(num) {
+        return new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM answer ORDER BY score DESC LIMIT ?";
+            
+            db.all(sql, [num], (err, rows) => {
+                if (err)
+                    reject(err);
+                else
+                    resolve(rows);
+            })
+        });
+    }
+
+    this.afterDate = function afterDate(date) {
+        return new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM question WHERE date > ?";
+            
+            db.all(sql, [date.toISOString()], (err, rows) => {
+                if (err)
+                    reject(err);
+                else
+                    resolve(rows);
+            }) 
         });
     }
 }
@@ -61,20 +100,22 @@ async function main(){
     const q1 = await qList.getQuestion(1);
     console.log("The first question is: ", q1);
 
-    //const question = new Question(3, "How to pass WebApp I?", "John Lennon", "2022-07-22");
-    //qList.addQuestion(question);
+    const question = new Question(3, "How to pass WebApp I?", "John Lennon", "2022-07-22");
+    qList.addQuestion(question);
 
     const q3 = await qList.getQuestion(3);
     console.log("The third question is: ", q3);
 
-    //const question2 = new Question(4, "How to pass WebApp II?", "Mario Rossi", "2023-03-14")
-    //qList.addQuestion(question2);
+    const question2 = new Question(4, "How to pass WebApp II?", "Mario Rossi", "2023-03-14")
+    qList.addQuestion(question2);
 
     const q4 = await qList.getQuestion(4);
     console.log("The third question is: ", q4);
 
-    const answer = new Answer(5, "Study", "JS developer", "150", "2023-03-14")
+    const answer = new Answer(5, "Study", "JS developer", "2023-03-14", "150")
     qList.addAnswer(answer, q4.id);
+
+    console.log(qList.getTop(2).then((rows) => {rows.forEach((row) => console.log(row));}));
 }
 
 main();
