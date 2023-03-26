@@ -1,0 +1,12 @@
+aside, footer{
+    background-color: blue;
+    color: white;
+}
+
+.question {
+    color: red;
+}
+
+#bigger-margin {
+    margin-top: 3em;
+}
