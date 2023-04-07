@@ -34,9 +34,9 @@ function Question(id, text, author, date) {
 
   this.init = () => {
     this.answers.push(
-      new Answer(1, 'Yes', 'Luca Mannella', '2023-02-15', -10),
+      new Answer(1, 'Yes', 'Giovanni Bianchi', '2023-02-15', -10),
       new Answer(2, 'Not in a million year', 'Guido van Rossum', '2023-03-02', 5),
-      new Answer(3, 'No', 'Luigi De Russis', '2023-03-02', 10),
+      new Answer(3, 'No', 'Antonio Verdi', '2023-03-02', 10),
       new Answer(4, 'Both have their pros and cons', 'Mario Rossi', '2023-03-04')
     );
   }
@@ -100,7 +100,7 @@ function fillAnswersTable(answers) {
 }
 
 function main () {
-  const question = new Question(1, 'Is Javascript better than Python?', 'Luigi De Russis', '2023-02-07');
+  const question = new Question(1, 'Is Javascript better than Python?', 'Mario Rossi', '2023-02-07');
   question.init();
   const answers = question.getAnswers();
   fillAnswersTable(answers);
