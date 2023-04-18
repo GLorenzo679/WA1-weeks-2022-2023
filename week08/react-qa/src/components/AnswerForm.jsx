@@ -1,13 +1,26 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Answer } from '../QAModels';
+import dayjs from 'dayjs';
 
-function FormAnswer() {
-  const [text, setText] = useState('');
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+function AnswerForm(props) {
+  const [id, setId] = useState(props.answer ? props.answer.id : props.lastId + 1);
+  const [text, setText] = useState(props.answer ? props.answer.text : '');
+  const [name, setName] = useState(props.answer ? props.answer.name : '');
+  const [date, setDate] = useState(props.answer ? props.answer.date.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD'));
+  const [score, setScore] = useState(props.answer ? props.answer.score : 0);
 
-  const handleSubmit = () => {
-    // do something
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // create a new answer
+    const answer = new Answer(id, text, name, date, score);
+
+    if (props.answer){
+      props.updateAnswer(answer);
+    }
+    else{
+      props.addAnswer(answer);
+    }
   }
 
   return (
@@ -29,4 +42,4 @@ function FormAnswer() {
   );
 }
 
-export default FormAnswer;
+export default AnswerForm;
