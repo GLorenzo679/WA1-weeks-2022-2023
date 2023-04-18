@@ -24,7 +24,7 @@ function AnswerForm(props) {
   }
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className='mb-3'>
         <Form.Label>Text</Form.Label>
         <Form.Control type="text" minLength={2} required={true} value={text} onChange={(event) => setText(event.target.value)}></Form.Control>
@@ -37,7 +37,7 @@ function AnswerForm(props) {
         <Form.Label>Date</Form.Label>
         <Form.Control type="date" value={date} onChange={(event) => setDate(event.target.value)}></Form.Control>
       </Form.Group>
-      <Button variant="primary" type="submit">Add</Button> <Button variant="danger">Cancel</Button>
+      <Button variant="primary" type="submit">Add</Button> <Button variant="danger" onClick={props.cancel}>Cancel</Button>
     </Form>
   );
 }

@@ -42,25 +42,35 @@ function AnswerTable(props) {
             <th>Date</th>
             <th>Text</th>
             <th>Author</th>
-            <th>Score<Button variant="link" onClick={sortByScore}><i className="bi bi-sort-numeric-down"></i></Button></th>
+            <th>Score <Button variant="link" onClick={sortByScore} style={{color: 'black'}}><i className={sortOrder === 'asc' ? 'bi bi-sort-numeric-up' : 'bi bi-sort-numeric-down'}></i></Button></th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {
-            sortedAnswers.map((ans) => <AnswerRow answer={ans} key={ans.id} voteUp={props.voteUp} setShowForm={setShowForm}  setEditableAnswer={setEditableAnswer}/>)
+            sortedAnswers.map((ans) => <AnswerRow answer={ans} key={ans.id} voteUp={props.voteUp} setShowForm={setShowForm} setEditableAnswer={setEditableAnswer}/>)
           }
         </tbody>
       </Table>
 
-      {showForm ? <AnswerForm key={editableAnswer ? editableAnswer.id : -1} lastId={props.answers.slice(-1)[0].id} answer={editableAnswer} addAnswer={(answer) => {props.addAnswer(answer); setShowForm(false);}} updateAnswer={(answer) => {props.updateAnswer(answer); setShowForm(false);}} cancel={() => {setShowForm(false);}}></AnswerForm> : <Button variant="success" onClick={() => setShowForm(true)}>Add</Button>}
+      { showForm ? 
+          <AnswerForm 
+            key={editableAnswer ? editableAnswer.id : -1} 
+            lastId={props.answers.slice(-1)[0].id} 
+            answer={editableAnswer} 
+            addAnswer={(answer) => {props.addAnswer(answer); setShowForm(false);}} 
+            cancel={() => setShowForm(false)} 
+            updateAnswer={(answer) => {props.updateAnswer(answer); setShowForm(false);}}
+          /> 
+        : 
+          <Button variant="success" onClick={() => { setShowForm(true); setEditableAnswer(); }}>Add</Button>}
     </>
   );
 }
 
 function AnswerRow(props) {
-  return (
-    <tr><AnswerData answer={props.answer} /><AnswerActions voteUp={props.voteUp} answer={props.answer} setEditableAnswer={props.setEditableAnswer}/></tr>
+  return(
+    <tr><AnswerData answer={props.answer}/><AnswerActions voteUp={props.voteUp} answer={props.answer} setShowForm={props.setShowForm} setEditableAnswer={props.setEditableAnswer}/></tr>
   );
 }
 
@@ -77,9 +87,8 @@ function AnswerData(props) {
 
 function AnswerActions(props) {
   return <td>
-    <Button variant='primary' onClick={() => {props.setShowForm(true); props.setEditableAnswer(props.answer);}}><i className='bi bi-pencil-square'></i></Button>
-    <Button variant='success' onClick={() => props.voteUp(props.answer.id)}><i className='bi bi-arrow-up'></i></Button>
-  </td>
+    <Button variant='primary' onClick={() => {props.setShowForm(true); props.setEditableAnswer(props.answer);}}><i className='bi bi-pencil-square'></i></Button> <Button variant='success' onClick={() => props.voteUp(props.answer.id)}><i className='bi bi-arrow-up'></i></Button>
+    </td>
 }
 
 export default Answers;
