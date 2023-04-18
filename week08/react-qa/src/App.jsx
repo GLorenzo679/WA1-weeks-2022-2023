@@ -21,7 +21,6 @@ function App() {
     setAnswers(oldAnswer => {
       return oldAnswer.map((ans) => {
         if(ans.id === answerId) {
-          // return the "updated" answer
           return new Answer(ans.id, ans.text, ans.name, ans.date, ans.score +1);
         }
         else
