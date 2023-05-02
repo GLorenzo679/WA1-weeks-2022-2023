@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Answer } from '../QAModels';
 import dayjs from 'dayjs';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AnswerForm(props) {
+  const navigate = useNavigate();
+  const questionId = props.answer ? props.answer.questionId : 1;
   const [id, setId] = useState(props.answer ? props.answer.id : props.lastId + 1);
   const [text, setText] = useState(props.answer ? props.answer.text : '');
   const [name, setName] = useState(props.answer ? props.answer.name : '');
@@ -13,7 +16,7 @@ function AnswerForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // create a new answer
-    const answer = new Answer(id, text, name, date, score);
+    const answer = new Answer(id, text, name, date, questionId, score);
     // TODO: add validations!
     if(props.answer) {
       props.updateAnswer(answer);
@@ -21,6 +24,8 @@ function AnswerForm(props) {
     else {
       // add the answer to the "answers" state
       props.addAnswer(answer);
+      // navigate(`/questions/${answer.questionId}`);
+      navigate("..", {relative:'path'});
     }
   }
 
@@ -38,7 +43,7 @@ function AnswerForm(props) {
         <Form.Label>Date</Form.Label>
         <Form.Control type="date" value={date} onChange={(event) => setDate(event.target.value)}></Form.Control>
       </Form.Group>
-      <Button variant="primary" type="submit">Add</Button> <Button variant="danger" onClick={props.cancel}>Cancel</Button>
+      <Button variant="primary" type="submit">Add</Button> <Link to=".." relative="path" className="btn btn-danger">Cancel</Link>
     </Form>
   );
 }
