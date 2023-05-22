@@ -1,5 +1,5 @@
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Row, Col, Table, Button } from 'react-bootstrap';
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { Row, Col, Table, Button } from "react-bootstrap";
 
 function Answers(props) {
   return (
@@ -10,7 +10,7 @@ function Answers(props) {
       <Row>
         <Col lg={10} className="mx-auto">
           <AnswerTable answers={props.answers}></AnswerTable>
-        </Col> 
+        </Col>
       </Row>
     </>
   );
@@ -29,24 +29,27 @@ function AnswerTable(props) {
         </tr>
       </thead>
       <tbody>
-        {
-          props.answers.map((ans) => <AnswerRow answer={ans} key={ans.id} />)
-        }
+        {props.answers.map((ans) => (
+          <AnswerRow answer={ans} key={ans.id} />
+        ))}
       </tbody>
     </Table>
   );
 }
 
 function AnswerRow(props) {
-  return(
-    <tr><AnswerData answer={props.answer}/><AnswerActions /></tr>
+  return (
+    <tr>
+      <AnswerData answer={props.answer} />
+      <AnswerActions />
+    </tr>
   );
 }
 
 function AnswerData(props) {
-  return(
+  return (
     <>
-      <td>{props.answer.date.format('YYYY-MM-DD')}</td>
+      <td>{props.answer.date.format("YYYY-MM-DD")}</td>
       <td>{props.answer.text}</td>
       <td>{props.answer.name}</td>
       <td>{props.answer.score}</td>
@@ -55,9 +58,13 @@ function AnswerData(props) {
 }
 
 function AnswerActions() {
-  return <td>
-    <Button variant='success'><i className='bi bi-plus'></i></Button>
+  return (
+    <td>
+      <Button variant="success">
+        <i className="bi bi-plus"></i>
+      </Button>
     </td>
+  );
 }
 
 export { Answers };

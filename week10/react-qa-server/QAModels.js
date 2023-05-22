@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 /* Same of week 09, but 1) with require() instead of import and 2) without any internal methods */
 
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 
-function Answer(id, text, name, date, score=0) {
+function Answer(id, text, name, date, score = 0) {
   this.id = id;
   this.text = text;
   this.name = name;

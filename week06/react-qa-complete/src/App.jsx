@@ -1,15 +1,19 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Question from './QAModels';
-import { Container, Row } from 'react-bootstrap';
-import { Answers } from './components/AnswerComponents';
-import NavHeader from './components/NavbarComponents';
-import QuestionDescription from './components/QuestionComponents';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Question from "./QAModels";
+import { Container, Row } from "react-bootstrap";
+import { Answers } from "./components/AnswerComponents";
+import NavHeader from "./components/NavbarComponents";
+import QuestionDescription from "./components/QuestionComponents";
 
-const fakeQuestion = new Question(1, 'Is JavaScript better than Python?', 'Luigi De Russis', '2023-02-07');
+const fakeQuestion = new Question(
+  1,
+  "Is JavaScript better than Python?",
+  "Luigi De Russis",
+  "2023-02-07",
+);
 fakeQuestion.init();
 
 function App() {
-
   return (
     <>
       <NavHeader questionNum={fakeQuestion.id} />
@@ -18,8 +22,7 @@ function App() {
         <Answers answers={fakeQuestion.getAnswers()}></Answers>
       </Container>
     </>
-    
-  )
+  );
 }
 
 export default App;

@@ -18,4 +18,4 @@ For each component, list the information (`prop`s) that are required by that com
 
 Create a file `Components.jsx`, and define the React components as functions, and modify the App to render those components.
 
-The components should **not** be interactive, yet. 
+The components should **not** be interactive, yet.

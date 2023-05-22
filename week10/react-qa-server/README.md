@@ -3,9 +3,10 @@
 The `react-qa-server` is the server-side app companion of HeapOverrun (i.e., `react-qa`). It presents some APIs to perform some CRUD operations on questions and their answers.
 
 ## APIs
+
 Hereafter, we report the designed HTTP APIs, also implemented in the project.
 
-### __List all questions__
+### **List all questions**
 
 URL: `/api/questions`
 
@@ -16,6 +17,7 @@ Description: Get all the available questions.
 Response: `200 OK` (success) or `500 Internal Server Error` (generic error).
 
 Response body:
+
 ```
 [
   {
@@ -28,7 +30,7 @@ Response body:
 ]
 ```
 
-### __Get a single question__
+### **Get a single question**
 
 URL: `/api/questions/<id>`
 
@@ -39,6 +41,7 @@ Description: Get the question represented by the `<id>`.
 Response: `200 OK` (success), `404 Not Found` (wrong id), or `500 Internal Server Error` (generic error).
 
 Response body:
+
 ```
 {
   "id": 1,
@@ -48,7 +51,7 @@ Response body:
 }
 ```
 
-### __List all the answers of a given question__
+### **List all the answers of a given question**
 
 URL: `/api/questions/<id>/answers`
 
@@ -59,6 +62,7 @@ Description: Get all the available answers for the question identified by `<id>`
 Response: `200 OK` (success), `404 Not Found` (wrong id), or `500 Internal Server Error` (generic error).
 
 Response body: A JSON array of objects, each describing an answer.
+
 ```
 [
   {
@@ -72,7 +76,7 @@ Response body: A JSON array of objects, each describing an answer.
 ]
 ```
 
-### __Create a new answer for a given question__
+### **Create a new answer for a given question**
 
 URL: `/api/questions/<id>/answers`
 
@@ -81,6 +85,7 @@ HTTP Method: POST.
 Description: Create a new answer for the question identified by `<id>`.
 
 Request body: A JSON object representing a new answer.
+
 ```
 {
   "text": "The Italian course has around 230 first-time students",
@@ -94,7 +99,7 @@ Response: `201 Created` (success) or `503 Service Unavailable` (generic error). 
 
 Response body: _None_
 
-### __Update an existing answer__
+### **Update an existing answer**
 
 URL: `/api/answers/<id>`
 
@@ -103,6 +108,7 @@ HTTP Method: PUT.
 Description: Update an identified by `<id>`.
 
 Request body: A JSON object representing the answer.
+
 ```
 {
   "text": "The Italian course has around 231 first-time students",
@@ -116,7 +122,7 @@ Response: `200 OK` (success), `404 Not Found` (wrong id), or `503 Service Unavai
 
 Response body: _None_
 
-### __Vote for an answer__
+### **Vote for an answer**
 
 URL: `/api/answers/<id>/vote`
 
@@ -125,6 +131,7 @@ HTTP Method: POST.
 Description: Upvote (+1) or downvote (-1) an existing answer (identified by its `<id>`).
 
 Request body: A JSON object representing the action.
+
 ```
 {
   "vote": "upvote"

@@ -1,10 +1,11 @@
-aside, footer {
+aside,
+footer {
   background-color: blue;
   color: white;
 }
 
 .question {
-  color:dimgray;
+  color: dimgray;
 }
 
 #bigger-margin {

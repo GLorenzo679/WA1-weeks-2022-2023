@@ -1,10 +1,10 @@
 /* Data Access Object (DAO) module for accessing Q&A */
 /* Initial version taken from exercise 4 (week 03) */
-const sqlite = require('sqlite3');
-const {Question, Answer} = require('./QAModels');
+const sqlite = require("sqlite3");
+const { Question, Answer } = require("./QAModels");
 
 // open the database
-const db = new sqlite.Database('questions.sqlite', (err) => {
+const db = new sqlite.Database("questions.sqlite", (err) => {
   if (err) throw err;
 });
 
@@ -12,26 +12,26 @@ const db = new sqlite.Database('questions.sqlite', (err) => {
 // get all the questions
 exports.listQuestions = () => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM question';
+    const sql = "SELECT * FROM question";
     db.all(sql, [], (err, rows) => {
       if (err) {
         reject(err);
       }
-      const questions = rows.map((q) => new Question(q.id, q.text, q.author, q.date));
+      const questions = rows.map(
+        (q) => new Question(q.id, q.text, q.author, q.date),
+      );
       resolve(questions);
     });
   });
-}
+};
 
 // get a question given its id
 exports.getQuestion = (id) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM question WHERE id = ?';
+    const sql = "SELECT * FROM question WHERE id = ?";
     db.get(sql, [id], (err, row) => {
-      if (err)
-        reject(err);
-      if (row == undefined)
-        resolve({error: 'Question not found.'}); 
+      if (err) reject(err);
+      if (row == undefined) resolve({ error: "Question not found." });
       else {
         const question = new Question(row.id, row.text, row.author, row.date);
         resolve(question);
@@ -43,11 +43,16 @@ exports.getQuestion = (id) => {
 // add a new question
 exports.addQuestion = (question) => {
   return new Promise((resolve, reject) => {
-    const sql = 'INSERT INTO question(text, author, date) VALUES (?, ?, DATE(?))';
-    db.run(sql, [question.text, question.author, question.date], function(err) {
-      if(err) reject(err);
-      else resolve(this.lastID);
-    });
+    const sql =
+      "INSERT INTO question(text, author, date) VALUES (?, ?, DATE(?))";
+    db.run(
+      sql,
+      [question.text, question.author, question.date],
+      function (err) {
+        if (err) reject(err);
+        else resolve(this.lastID);
+      },
+    );
   });
 };
 
@@ -56,12 +61,14 @@ exports.addQuestion = (question) => {
 // get all the answer of a given question
 exports.listAnswersOf = (questionId) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM answer WHERE questionId = ?';
+    const sql = "SELECT * FROM answer WHERE questionId = ?";
     db.all(sql, [questionId], (err, rows) => {
       if (err) {
         reject(err);
       }
-      const answers = rows.map((a) => new Answer(a.id, a.text, a.name, a.date, a.questionId, a.score));
+      const answers = rows.map(
+        (a) => new Answer(a.id, a.text, a.name, a.date, a.questionId, a.score),
+      );
       resolve(answers);
     });
   });
@@ -69,28 +76,39 @@ exports.listAnswersOf = (questionId) => {
 
 // add a new answer
 exports.addAnswer = (answer) => {
-  return new Promise ((resolve, reject) => {
-    const sql = 'INSERT INTO answer(text, author, date, score, questionId) VALUES (?, ?, DATE(?), ?, ?)';
-    db.run(sql, [answer.text, answer.author, answer.date, answer.score, answer.questionId], function(err) {
-      if(err) reject(err);
-      else resolve(this.lastID);
-    });
+  return new Promise((resolve, reject) => {
+    const sql =
+      "INSERT INTO answer(text, author, date, score, questionId) VALUES (?, ?, DATE(?), ?, ?)";
+    db.run(
+      sql,
+      [
+        answer.text,
+        answer.author,
+        answer.date,
+        answer.score,
+        answer.questionId,
+      ],
+      function (err) {
+        if (err) reject(err);
+        else resolve(this.lastID);
+      },
+    );
   });
 };
 
 // update an existing answer
 exports.updateAnswer = (answer) => {
   // write something clever
-}
+};
 
 // vote for an answer
 exports.voteAnswer = (answerId, vote) => {
-  return new Promise ((resolve, reject) => {
-    const delta = vote === 'upvote' ? 1: -1;
-    const sql = 'UPDATE answer SET score = score + ? WHERE id = ?';
-    db.run(sql, [delta, answerId], function(err) {
-      if(err) reject(err);
+  return new Promise((resolve, reject) => {
+    const delta = vote === "upvote" ? 1 : -1;
+    const sql = "UPDATE answer SET score = score + ? WHERE id = ?";
+    db.run(sql, [delta, answerId], function (err) {
+      if (err) reject(err);
       resolve(this.changes);
     });
   });
-}
+};
