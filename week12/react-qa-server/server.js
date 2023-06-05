@@ -68,15 +68,14 @@ app.post(
     const newAnswer = req.body;
     const questionId = req.params.id;
 
-    try {
-      const id = await dao.addAnswer(newAnswer, questionId);
-      res.status(201).location(id);
-    } catch (e) {
-      console.error(`ERROR: ${e.message}`);
-      res.status(503).json({ error: "Impossible to create the answer." });
-    }
-  },
-);
+  try {
+    const id = await dao.addAnswer(newAnswer, questionId);
+    res.status(201).location(id).end();
+  } catch(e) {
+    console.error(`ERROR: ${e.message}`);
+    res.status(503).json({error: 'Impossible to create the answer.'});
+  }
+});
 
 // PUT /api/answers/<id>
 app.put(
