@@ -25,46 +25,56 @@ const getAnswers = async (questionId) => {
 
 const vote = async (answerId) => {
   const response = await fetch(`${SERVER_URL}/api/answers/${answerId}/vote`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({vote: 'upvote'})
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ vote: "upvote" }),
   });
 
-  if(!response.ok) {
+  if (!response.ok) {
     const errMessage = await response.json();
     throw errMessage;
-  }
-  else return null;
+  } else return null;
   // TODO: add improved error handling
-}
+};
 
 const addAnswer = async (answer, questionId) => {
-  const response = await fetch(`${SERVER_URL}/api/questions/${questionId}/answers`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({text: answer.text, author: answer.name, score: 0, date: answer.date.format('YYYY-MM-DD')})
-  });
+  const response = await fetch(
+    `${SERVER_URL}/api/questions/${questionId}/answers`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: answer.text,
+        author: answer.name,
+        score: 0,
+        date: answer.date.format("YYYY-MM-DD"),
+      }),
+    },
+  );
 
-  if(!response.ok) {
+  if (!response.ok) {
     const errMessage = await response.json();
     throw errMessage;
-  }
-  else return null;
-}
+  } else return null;
+};
 
 const updateAnswer = async (answer) => {
   const response = await fetch(`${SERVER_URL}/api/answers/${answer.id}`, {
-    method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({text: answer.text, author: answer.name, score: answer.score, date: answer.date.format('YYYY-MM-DD')})
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      text: answer.text,
+      author: answer.name,
+      score: answer.score,
+      date: answer.date.format("YYYY-MM-DD"),
+    }),
   });
 
-  if(!response.ok) {
+  if (!response.ok) {
     const errMessage = await response.json();
     throw errMessage;
-  }
-  else return null;
-}
+  } else return null;
+};
 
-const API = {getQuestions, getAnswers, vote, addAnswer, updateAnswer};
+const API = { getQuestions, getAnswers, vote, addAnswer, updateAnswer };
 export default API;
