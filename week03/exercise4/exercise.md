@@ -47,14 +47,14 @@ The information should also be stored in a SQlite database (`questions.sqlite`),
 
 Each `Question` object will have the following methods, operating directly on the database:
 
-- `addAnswer(answer)` // pass a fully-constructed `Answer` object and store it both in the database
-- `getAnswers()` // returns a Promise that resolves to an array with all the `Answer`s to that question, by querying the database
-- `getTop(num)` // returns a Promise that resolves to an array with the _num_ best `Answer`s, according to their score
+-   `addAnswer(answer)` // pass a fully-constructed `Answer` object and store it both in the database
+-   `getAnswers()` // returns a Promise that resolves to an array with all the `Answer`s to that question, by querying the database
+-   `getTop(num)` // returns a Promise that resolves to an array with the _num_ best `Answer`s, according to their score
 
 A new `QuestionList` object represents all the `Question`s, and it will have the following methods operating on the database:
 
-- `addQuestion(question)` // pass a fully-constructed `Question` object
-- `getQuestion(id)` // returns a Promise that resolves to a `Question` with the given id
-- `afterDate(date)` // returns a Promise that resolves to an array with all the `Question`s after the given date
+-   `addQuestion(question)` // pass a fully-constructed `Question` object
+-   `getQuestion(id)` // returns a Promise that resolves to a `Question` with the given id
+-   `afterDate(date)` // returns a Promise that resolves to an array with all the `Question`s after the given date
 
 Suggestion: implement the methods in this order: QuestionList.getQuestion, QuestionList.add, Question.getAnswers, Question.add, Question.getTop, QuestionList.afterDate.

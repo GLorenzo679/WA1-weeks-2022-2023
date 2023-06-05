@@ -1,9 +1,9 @@
 "use strict";
 
 const movie = {
-  title: "Inception",
-  genre: "sci-fi",
-  duration: 180,
+	title: "Inception",
+	genre: "sci-fi",
+	duration: 180,
 };
 
 console.log(movie);

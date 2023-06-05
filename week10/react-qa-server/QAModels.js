@@ -5,18 +5,18 @@
 const dayjs = require("dayjs");
 
 function Answer(id, text, name, date, score = 0) {
-  this.id = id;
-  this.text = text;
-  this.name = name;
-  this.score = score;
-  this.date = dayjs(date);
+	this.id = id;
+	this.text = text;
+	this.name = name;
+	this.score = score;
+	this.date = dayjs(date);
 }
 
 function Question(id, text, author, date) {
-  this.id = id;
-  this.text = text;
-  this.author = author;
-  this.date = dayjs(date);
+	this.id = id;
+	this.text = text;
+	this.author = author;
+	this.date = dayjs(date);
 }
 
 module.exports = { Question, Answer };

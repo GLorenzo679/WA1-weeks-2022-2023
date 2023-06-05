@@ -1,13 +1,13 @@
 aside,
 footer {
-  background-color: blue;
-  color: white;
+	background-color: blue;
+	color: white;
 }
 
 .question {
-  color: dimgray;
+	color: dimgray;
 }
 
 #bigger-margin {
-  margin-top: 3em;
+	margin-top: 3em;
 }

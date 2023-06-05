@@ -1,15 +1,15 @@
 {
-  "dependencies": {
-    "dayjs": "^1.11.7",
-    "sqlite3": "^5.1.5"
-  },
-  "name": "questions",
-  "version": "0.0.1",
-  "main": "qa.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+	"dependencies": {
+		"dayjs": "^1.11.7",
+		"sqlite3": "^5.1.5"
+	},
+	"name": "questions",
+	"version": "0.0.1",
+	"main": "qa.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"description": ""
 }

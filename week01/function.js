@@ -2,12 +2,12 @@
 
 // CLASS
 class Movie {
-  constructor(title, genre, duration) {
-    this.title = title;
-    this.genre = genre;
-    this.duration = duration;
-    this.isLong = () => duration >= 120;
-  }
+	constructor(title, genre, duration) {
+		this.title = title;
+		this.genre = genre;
+		this.duration = duration;
+		this.isLong = () => duration >= 120;
+	}
 }
 
 // FUNCTION CONSTRUCTOR

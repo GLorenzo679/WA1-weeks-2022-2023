@@ -4,19 +4,19 @@ import { Container } from "react-bootstrap";
 import { Answers } from "./components/AnswerComponents";
 
 const fakeQuestion = new Question(
-  1,
-  "Is JavaScript better than Python?",
-  "Mario Rossi",
-  "2023-02-07",
+	1,
+	"Is JavaScript better than Python?",
+	"Mario Rossi",
+	"2023-02-07"
 );
 fakeQuestion.init();
 
 function App() {
-  return (
-    <Container>
-      <Answers answers={fakeQuestion.getAnswers()}></Answers>
-    </Container>
-  );
+	return (
+		<Container>
+			<Answers answers={fakeQuestion.getAnswers()}></Answers>
+		</Container>
+	);
 }
 
 export default App;
